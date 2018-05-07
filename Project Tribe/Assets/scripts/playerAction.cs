@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class playerAction : MonoBehaviour 
 {
-	private bool goingToPickUp;
-	private GameObject pickUpTarget;
+	private string[] actionStates = {"pick-up", "talk"};
+	private float[] distanceToActivateState = {0.001f, 0.4f};
+	private string currentActionState;
+	private bool inActionState;
+	private GameObject itemOfAction;
 
 	
 	void Start () 
 	{
-		goingToPickUp = false;
+		currentActionState = "idle";
 	}
 	
 	
@@ -20,15 +23,48 @@ public class playerAction : MonoBehaviour
 	}
 
 
-	public void setPickUp (bool newStatues, GameObject itemToBePickedUp)
+	public void setState (string newStatues, GameObject targetOfAction)
 	{
-		goingToPickUp = newStatues;
-		pickUpTarget = itemToBePickedUp;
+		currentActionState = newStatues;
+		inActionState = true;
+		itemOfAction = targetOfAction;
 	}
 
 
-	public bool getPickUpStatues ()
+	public bool getIfInActionState ()
 	{
-		return goingToPickUp;
+		return inActionState;
 	}
+
+
+	public string getState ()
+	{
+		return currentActionState;
+	}
+
+
+	public float getActivateDistance()
+	{
+		float distanceOfActionReturn = 0.0f;
+
+		if(actionStates[0].Equals(currentActionState))
+		{
+			distanceOfActionReturn = distanceToActivateState[0];
+		}
+		else if(actionStates[1].Equals(currentActionState))
+		{
+			distanceOfActionReturn = distanceToActivateState[1];
+		}
+
+		return distanceOfActionReturn;
+	}
+
+
+	// private void stateManager()
+	// {
+	// 	if (playerActionState.Equals(actionStates[0]))
+	// 	{
+			
+	// 	}
+	// }
 }

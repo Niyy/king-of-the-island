@@ -30,8 +30,14 @@ public class pickUpBehavior : MonoBehaviour
 
 		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) < 0.24f)
 		{
-			player.GetComponent<playerAction>().setPickUp(true, this.gameObject);
+			player.GetComponent<playerAction>().setState("pick-up", this.gameObject);
 			targeted = true;
+		}
+		else if (Input.GetMouseButtonUp(1) && 
+		player.GetComponent<playerAction>().getState().Equals("pick-up"))
+		{
+			targeted = false;
+			pickedUp = false;
 		}
 	}
 

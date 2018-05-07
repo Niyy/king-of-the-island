@@ -44,17 +44,22 @@ public class playerMovement : MonoBehaviour
 			this.transform.position = Vector2.MoveTowards(this.transform.position,
 			 playerDestination, walkSpeed * Time.deltaTime);
 
-			 if(Vector2.Distance(this.transform.position, playerDestination) <= 0.01f)
-			 {
-				 hasADestination = false;
-			 }
+			if (playerAction.getState().Equals("talk") && 
+			Vector2.Distance(this.transform.position, playerDestination) <= 0.40f)
+			{
+				hasADestination = false;
+			}
+			else if(Vector2.Distance(this.transform.position, playerDestination) <= 0.01f)
+			{
+				hasADestination = false;
+			}
 		}
 	}
 
 
 	private void movePlayerTowardTarget()
 	{
-		if (Input.GetMouseButtonUp(1) && GetComponent<playerAction>().getPickUpStatues())
+		if (Input.GetMouseButtonUp(1) && GetComponent<playerAction>().getIfInActionState())
 		{
 			hasADestination = true;
 			playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
