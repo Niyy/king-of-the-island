@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerAction : MonoBehaviour 
 {
 	private string[] actionStates = {"pick-up", "talk"};
-	private float[] distanceToActivateState = {0.001f, 0.4f};
+	private float[] distanceToActivateState = {0.001f, 0.5f};
 	private string currentActionState;
 	private bool inActionState;
 	private GameObject itemOfAction;

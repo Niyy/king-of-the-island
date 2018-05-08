@@ -44,7 +44,7 @@ public class npcInteraction : MonoBehaviour
 		Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 yourPos = this.transform.position;
 
-		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) < 0.24f)
+		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) <= 0.44)
 		{
 			player.GetComponent<playerAction>().setState("talk", this.gameObject);
 			targeted = true;
