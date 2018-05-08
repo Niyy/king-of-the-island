@@ -32,6 +32,8 @@ public class npcInteraction : MonoBehaviour
 			if(Vector2.Distance(yourPos, playerPos) <= player.GetComponent<playerAction>().getActivateDistance())
 			{
 				Debug.Log("Hey whats up Maui!");
+				player.GetComponent<playerAction>().setIfInActionState(true);
+				targeted = false;
 			}
 		}
 	}

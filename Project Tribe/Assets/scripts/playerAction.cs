@@ -23,23 +23,34 @@ public class playerAction : MonoBehaviour
 	}
 
 
-	public void setState (string newStatues, GameObject targetOfAction)
+	public void setState(string newStatues, GameObject targetOfAction)
 	{
 		currentActionState = newStatues;
-		inActionState = true;
 		itemOfAction = targetOfAction;
 	}
 
 
-	public bool getIfInActionState ()
+	public bool getIfInActionState()
 	{
 		return inActionState;
 	}
 
 
-	public string getState ()
+	public void setIfInActionState(bool willItBeInAction)
+	{
+		inActionState = willItBeInAction;
+	}
+
+
+	public string getState()
 	{
 		return currentActionState;
+	}
+
+
+	public GameObject getObjectOfInteraction ()
+	{
+		return itemOfAction;
 	}
 
 

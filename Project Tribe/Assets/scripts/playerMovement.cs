@@ -21,13 +21,20 @@ public class playerMovement : MonoBehaviour
 	
 	void Update () 
 	{
-		moveplayer();
+		if (!playerAction.getState().Equals("talking") && !playerAction.getIfInActionState())
+		{
+			moveplayer();
+		}
 	}
 
 
 	public void LateUpdate ()
 	{
-		movePlayerTowardTarget();
+		if (!playerAction.getState().Equals("talking") && !playerAction.getIfInActionState())
+		{
+			movePlayerTowardTarget();
+		}
+		
 	}
 
 
@@ -48,6 +55,7 @@ public class playerMovement : MonoBehaviour
 			Vector2.Distance(this.transform.position, playerDestination) <= 0.40f)
 			{
 				hasADestination = false;
+				playerAction.setIfInActionState(false);
 			}
 			else if(Vector2.Distance(this.transform.position, playerDestination) <= 0.01f)
 			{
@@ -59,7 +67,7 @@ public class playerMovement : MonoBehaviour
 
 	private void movePlayerTowardTarget()
 	{
-		if (Input.GetMouseButtonUp(1) && GetComponent<playerAction>().getIfInActionState())
+		if (Input.GetMouseButtonUp(1) && !GetComponent<playerAction>().getState().Equals("idle"))
 		{
 			hasADestination = true;
 			playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);

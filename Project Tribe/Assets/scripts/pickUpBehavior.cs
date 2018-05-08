@@ -28,13 +28,14 @@ public class pickUpBehavior : MonoBehaviour
 		Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 yourPos = this.transform.position;
 
-		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) < 0.24f)
+		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) < 0.24f && !targeted)
 		{
 			player.GetComponent<playerAction>().setState("pick-up", this.gameObject);
 			targeted = true;
+			player.GetComponent<playerAction>().setIfInActionState(false);
+			Debug.Log("not really droping box. " + player.GetComponent<playerAction>().getIfInActionState());
 		}
-		else if (Input.GetMouseButtonUp(1) && 
-		player.GetComponent<playerAction>().getState().Equals("pick-up"))
+		else if (Input.GetMouseButtonUp(1) && targeted)
 		{
 			targeted = false;
 			pickedUp = false;
@@ -47,7 +48,7 @@ public class pickUpBehavior : MonoBehaviour
 		if (pickedUp)
 		{
 			this.transform.position = player.transform.position;
-			Debug.Log("Hey I am being transported");
+			Debug.Log("Hey I am being transported " + player.GetComponent<playerAction>().getIfInActionState());
 		}
 	}
 
