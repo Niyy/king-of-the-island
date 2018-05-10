@@ -422,8 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogPanelPrefab: {fileID: 1969688987642096, guid: ae8b5b892963d5e4781feb8f56f06c17,
     type: 2}
-  panelXOffset: 0.25
-  panelYOffset: 1.8
+  panelXOffset: 2.5
+  panelYOffset: 2.5
 --- !u!114 &1626159062
 MonoBehaviour:
   m_ObjectHideFlags: 0

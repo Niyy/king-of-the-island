@@ -40,7 +40,6 @@ public class ConversationController : MonoBehaviour
 
 		foreach(Text text in listOfButtons)
 		{
-			Debug.Log("Button Name: " + text.name);
 		}
 
 		for(int count = 4; count > -1; count--)

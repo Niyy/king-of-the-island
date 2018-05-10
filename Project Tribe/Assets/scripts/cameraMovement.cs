@@ -7,6 +7,7 @@ public class cameraMovement : MonoBehaviour
 	private float panSpeed;
 	private GameObject player;
 	private bool hasArrived;
+	private bool amIMoving;
 
 	
 	void Start () 
@@ -42,7 +43,7 @@ public class cameraMovement : MonoBehaviour
 
 	private bool isPlayerInSweetSpot()
 	{
-		bool soHaveThey = true;
+		bool soHaveThey = false;
 		Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y,
 		-10);
 		Vector3 yourPos = this.transform.position;
@@ -50,6 +51,11 @@ public class cameraMovement : MonoBehaviour
 		if(!hasArrived && Vector2.Distance(yourPos, playerPos) >= 0.01f)
 		{
 			soHaveThey = true;
+			hasArrived = false;
+		}
+		else
+		{
+			hasArrived = true;
 		}
 
 		return soHaveThey;
@@ -65,11 +71,22 @@ public class cameraMovement : MonoBehaviour
 		{
 			this.transform.position = Vector3.MoveTowards(this.transform.position, playerPos,
 			panSpeed * Time.deltaTime);
+			Debug.Log("Player is not in the sweet spot.");
 		}
 		else if(isPlayerInSweetSpot())
 		{
 			this.transform.position = Vector3.MoveTowards(this.transform.position, playerPos,
 			panSpeed * Time.deltaTime * 0.5f);
+			Debug.Log("The camera is moving, but in sweet spot.");
 		}
+		
+	}
+
+
+	public bool isCameraMoving ()
+	{
+		Debug.Log("hasArrived: " + hasArrived);
+
+		return hasArrived;
 	}
 }
