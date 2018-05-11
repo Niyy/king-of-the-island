@@ -12,7 +12,7 @@ public class ConversationController : MonoBehaviour
 	public Text body;
 
 
-	private playerAction playerAction;
+	private PlayerAction playerAction;
 
 
 	
@@ -20,7 +20,7 @@ public class ConversationController : MonoBehaviour
 	{
 		setUpButtons();
 
-		playerAction = GameObject.FindGameObjectWithTag("Player").GetComponent<playerAction>();
+		playerAction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAction>();
 		buttonFour.text = "Bye";
 	}
 
@@ -58,5 +58,11 @@ public class ConversationController : MonoBehaviour
 					break;
 				}
 			}
+	}
+
+
+	private void conversationManager()
+	{
+		
 	}
 }

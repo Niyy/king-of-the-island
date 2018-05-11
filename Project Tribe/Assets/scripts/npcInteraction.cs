@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class npcInteraction : MonoBehaviour 
+public class NPCInteraction : MonoBehaviour 
 {
 	private GameObject player;
 	private bool targeted;
@@ -29,10 +29,10 @@ public class npcInteraction : MonoBehaviour
 			Vector2 playerPos = player.transform.position;
 			Vector2 yourPos = this.transform.position;
 
-			if(Vector2.Distance(yourPos, playerPos) <= player.GetComponent<playerAction>().getActivateDistance())
+			if(Vector2.Distance(yourPos, playerPos) <= player.GetComponent<PlayerAction>().getActivateDistance())
 			{
 				Debug.Log("Hey whats up Maui!");
-				player.GetComponent<playerAction>().setIfInActionState(true);
+				player.GetComponent<PlayerAction>().setIfInActionState(true);
 				targeted = false;
 			}
 		}
@@ -46,7 +46,7 @@ public class npcInteraction : MonoBehaviour
 
 		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) <= 0.44)
 		{
-			player.GetComponent<playerAction>().setState("talk", this.gameObject);
+			player.GetComponent<PlayerAction>().setState("talk", this.gameObject);
 			targeted = true;
 		}
 	}

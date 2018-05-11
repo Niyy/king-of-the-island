@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pickUpBehavior : MonoBehaviour 
+public class PickUpBehavior : MonoBehaviour 
 {
 	private GameObject player;
 	private bool pickedUp;
@@ -30,10 +30,10 @@ public class pickUpBehavior : MonoBehaviour
 
 		if(Input.GetMouseButtonUp(1) && Vector2.Distance(yourPos, mousePos) < 0.24f && !targeted)
 		{
-			player.GetComponent<playerAction>().setState("pick-up", this.gameObject);
+			player.GetComponent<PlayerAction>().setState("pick-up", this.gameObject);
 			targeted = true;
-			player.GetComponent<playerAction>().setIfInActionState(false);
-			Debug.Log("not really droping box. " + player.GetComponent<playerAction>().getIfInActionState());
+			player.GetComponent<PlayerAction>().setIfInActionState(false);
+			Debug.Log("not really droping box. " + player.GetComponent<PlayerAction>().getIfInActionState());
 		}
 		else if (Input.GetMouseButtonUp(1) && targeted)
 		{
@@ -48,7 +48,7 @@ public class pickUpBehavior : MonoBehaviour
 		if (pickedUp)
 		{
 			this.transform.position = player.transform.position;
-			Debug.Log("Hey I am being transported " + player.GetComponent<playerAction>().getIfInActionState());
+			Debug.Log("Hey I am being transported " + player.GetComponent<PlayerAction>().getIfInActionState());
 		}
 	}
 

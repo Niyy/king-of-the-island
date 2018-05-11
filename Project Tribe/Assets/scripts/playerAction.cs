@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerAction : MonoBehaviour 
+public class PlayerAction : MonoBehaviour 
 {
 	private string[] actionStates = {"pick-up", "talk"};
 	private float[] distanceToActivateState = {0.001f, 0.5f};

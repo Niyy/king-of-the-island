@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraMovement : MonoBehaviour 
+public class CameraMovement : MonoBehaviour 
 {
 	private float panSpeed;
 	private GameObject player;
@@ -14,7 +14,7 @@ public class cameraMovement : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		hasArrived = true;
-		panSpeed = player.GetComponent<playerMovement>().getWalkSpeed();
+		panSpeed = player.GetComponent<PlayerMovement>().getWalkSpeed();
 	}
 	
 	

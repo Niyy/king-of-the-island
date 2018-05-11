@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 360433277}
   - component: {fileID: 360433276}
   - component: {fileID: 360433280}
+  - component: {fileID: 360433281}
   m_Layer: 0
   m_Name: Tui
   m_TagString: Interactible NPC
@@ -326,6 +327,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59b4a49c96c4a3446b5688d3a5cd9dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &360433281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 360433275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e244f293c325246a5f6dab4e62b456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &458306555

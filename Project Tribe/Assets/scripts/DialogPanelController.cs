@@ -34,10 +34,10 @@ public class DialogPanelController : MonoBehaviour
 
 	private void  spawndiplomacyPanel()
 	{
-		playerAction playerAction = player.GetComponent<playerAction>();
+		PlayerAction playerAction = player.GetComponent<PlayerAction>();
 
 		if(playerAction.getState().Equals("talk") && playerAction.getIfInActionState() && !hasDipPanelSpawned &&
-		Camera.main.GetComponent<cameraMovement>().isCameraMoving())
+		Camera.main.GetComponent<CameraMovement>().isCameraMoving())
 		{
 			Vector2 npc = playerAction.getObjectOfInteraction().transform.position;
 			Vector2 cameraPos = Camera.main.transform.position;

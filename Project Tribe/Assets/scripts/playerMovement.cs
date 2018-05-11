@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour 
+public class PlayerMovement : MonoBehaviour 
 {
 	public float walkSpeed;
 	private Camera camera;
-	private playerAction playerAction;
+	private PlayerAction playerAction;
 	private bool hasADestination;
 	private Vector2 playerDestination;
 
@@ -15,7 +15,7 @@ public class playerMovement : MonoBehaviour
 	{
 		camera = Camera.main;
 		hasADestination = false;
-		playerAction = this.GetComponent<playerAction>();
+		playerAction = this.GetComponent<PlayerAction>();
 	}
 	
 	
@@ -67,7 +67,7 @@ public class playerMovement : MonoBehaviour
 
 	private void movePlayerTowardTarget()
 	{
-		if (Input.GetMouseButtonUp(1) && !GetComponent<playerAction>().getState().Equals("idle"))
+		if (Input.GetMouseButtonUp(1) && !GetComponent<PlayerAction>().getState().Equals("idle"))
 		{
 			hasADestination = true;
 			playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
