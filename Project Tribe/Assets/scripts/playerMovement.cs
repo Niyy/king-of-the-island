@@ -51,13 +51,19 @@ public class PlayerMovement : MonoBehaviour
 			this.transform.position = Vector2.MoveTowards(this.transform.position,
 			 playerDestination, walkSpeed * Time.deltaTime);
 
+
 			if (playerAction.getState().Equals("talk") && 
-			Vector2.Distance(this.transform.position, playerDestination) <= 0.40f)
+			Vector2.Distance(this.transform.position, playerDestination) <= playerAction.getActivateDistance())
 			{
 				hasADestination = false;
 				playerAction.setIfInActionState(false);
 			}
-			else if(Vector2.Distance(this.transform.position, playerDestination) <= 0.01f)
+			else if(playerAction.getState().Equals("combat") &&
+			Vector2.Distance(this.transform.position, playerDestination) <= playerAction.getActivateDistance())
+			{
+				hasADestination = false;
+			}
+			else if(Vector2.Distance(this.transform.position, playerDestination) <= playerAction.getActivateDistance())
 			{
 				hasADestination = false;
 			}
@@ -78,5 +84,11 @@ public class PlayerMovement : MonoBehaviour
 	public float getWalkSpeed()
 	{
 		return walkSpeed;
+	}
+
+
+	public bool getHasArrived()
+	{
+		return !hasADestination;
 	}
 }

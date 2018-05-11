@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b4a49c96c4a3446b5688d3a5cd9dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allianceRelation: war
 --- !u!114 &360433281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +627,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5930cd392bad7f4a8f41b874e8212ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackTime: 1
+  timeTillAttack: 0
+  dodging: 0
 --- !u!50 &1881660280
 Rigidbody2D:
   serializedVersion: 4

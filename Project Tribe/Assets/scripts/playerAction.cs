@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour 
 {
-	private string[] actionStates = {"pick-up", "talk"};
-	private float[] distanceToActivateState = {0.001f, 0.5f};
+	public float attackTime;
+	public float timeTillAttack;
+	public bool dodging;
+
+
+	private string[] actionStates = {"pick-up", "talk", "combat"};
+	private float[] distanceToActivateState = {0.001f, 0.4f, 0.4f};
 	private string currentActionState;
 	private bool inActionState;
 	private GameObject itemOfAction;
+	private PlayerMovement playerMovement;
 
 	
 	void Start () 
 	{
+		playerMovement = this.GetComponent<PlayerMovement>();
 		currentActionState = "idle";
+		dodging = false;
 	}
 	
 	
 	void Update () 
 	{
-		
+		if (currentActionState.Equals(actionStates[2]))
+		{
+			combatWatcher();
+		}
 	}
 
 
@@ -27,6 +38,11 @@ public class PlayerAction : MonoBehaviour
 	{
 		currentActionState = newStatues;
 		itemOfAction = targetOfAction;
+
+		if(newStatues.Equals(actionStates[2]))
+		{
+			timeTillAttack = Time.time;
+		}
 	}
 
 
@@ -66,16 +82,21 @@ public class PlayerAction : MonoBehaviour
 		{
 			distanceOfActionReturn = distanceToActivateState[1];
 		}
+		else if (actionStates[2].Equals(currentActionState))
+		{
+			distanceOfActionReturn = distanceToActivateState[2];
+		}
 
 		return distanceOfActionReturn;
 	}
 
 
-	// private void stateManager()
-	// {
-	// 	if (playerActionState.Equals(actionStates[0]))
-	// 	{
-			
-	// 	}
-	// }
+	private void combatWatcher()
+	{
+		if (playerMovement.getHasArrived() && Time.time - timeTillAttack >= attackTime)
+		{
+			Debug.Log("Attack enemy");
+			timeTillAttack = Time.time;
+		}
+	}
 }
