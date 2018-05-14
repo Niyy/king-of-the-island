@@ -7,6 +7,8 @@ public class PlayerAction : MonoBehaviour
 	public float attackTime;
 	public float timeTillAttack;
 	public bool dodging;
+	public float damageStrengthMin;
+	public float damageStrengthMax;
 
 
 	private string[] actionStates = {"pick-up", "talk", "combat"};
@@ -95,7 +97,10 @@ public class PlayerAction : MonoBehaviour
 	{
 		if (playerMovement.getHasArrived() && Time.time - timeTillAttack >= attackTime)
 		{
-			Debug.Log("Attack enemy");
+			float damageDealt = Mathf.RoundToInt(Random.Range(damageStrengthMin, 
+			damageStrengthMax));
+			Debug.Log("Attack enemy: " + damageDealt);
+			itemOfAction.GetComponent<NPCInteraction>().takeDamage(damageDealt);
 			timeTillAttack = Time.time;
 		}
 	}

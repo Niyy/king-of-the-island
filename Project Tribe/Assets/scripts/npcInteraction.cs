@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour 
 {
+	public float currentHealth;
+	public float startingHealth;
+
+
 	private GameObject player;
 	private bool targeted;
 	private bool talking;
 	public string allianceRelation;
 
 	
-	void Start () 
+	void Awake () 
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
-		allianceRelation = "neutral";
+		currentHealth = startingHealth;
+		//allianceRelation = "neutral";
 	}
 	
 	
@@ -66,5 +71,17 @@ public class NPCInteraction : MonoBehaviour
 	private void engageInCombat()
 	{
 		
+	}
+
+
+	public void takeDamage(float damageAmount)
+	{
+		currentHealth -= damageAmount;
+	}
+
+
+	public float getCurrentHealth()
+	{
+		return currentHealth;
 	}
 }
