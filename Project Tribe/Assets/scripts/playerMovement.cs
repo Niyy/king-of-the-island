@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour
 	private Camera camera;
 	private PlayerAction playerAction;
 	private bool hasADestination;
+	private bool dodging;
 	private Vector2 playerDestination;
+	private Vector2 returnLocation;
 
 	
 	void Start () 
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	void Update () 
 	{
-		if (!playerAction.getState().Equals("talking") && !playerAction.getIfInActionState())
+		if (!playerAction.getState().Equals("talking"))
 		{
 			moveplayer();
 		}
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void LateUpdate ()
 	{
-		if (!playerAction.getState().Equals("talking") && !playerAction.getIfInActionState())
+		if (!playerAction.getState().Equals("talking"))
 		{
 			movePlayerTowardTarget();
 		}
@@ -42,8 +44,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if(Input.GetMouseButton(0))
 		{
-			hasADestination = true;
-			playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
+			if (!playerAction.getState().Equals("combat"))
+			{
+				hasADestination = true;
+				playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
+			}
+			else
+			{
+				Vector2 dodgeDirection = camera.ScreenToWorldPoint(Input.mousePosition);
+				returnLocation = this.transform.position;
+				dodgeDirection.Normalize();
+				playerDestination = dodgeDirection;
+				dodging = true;
+			}
 		}
 
 		if(hasADestination)
@@ -67,17 +80,54 @@ public class PlayerMovement : MonoBehaviour
 			{
 				hasADestination = false;
 			}
+
+			Debug.Log("hasArrived " + !hasADestination);
+		}
+		else if (dodging)
+		{
+			dodgeMove();
 		}
 	}
 
 
 	private void movePlayerTowardTarget()
 	{
-		if (Input.GetMouseButtonUp(1) && !GetComponent<PlayerAction>().getState().Equals("idle"))
+		if(Input.GetMouseButtonUp(1))
 		{
-			hasADestination = true;
-			playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
+			if (playerAction.getIfInCombat())
+			{
+				hasADestination = true;
+				playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
+				playerAction.setState("idle", null);
+				Debug.Log("Hey I am disengaging.");
+			}
+			else if (playerAction.getState().Equals("combat"))
+			{
+				hasADestination = true;
+				playerDestination = playerAction.getObjectOfInteraction().transform.position;
+			}
+			else if (!playerAction.getState().Equals("idle"))
+			{
+				hasADestination = true;
+				playerDestination = camera.ScreenToWorldPoint(Input.mousePosition);
+			}
 		}
+	}
+
+
+	private void dodgeMove ()
+	{
+		Vector2 playerPos = this.transform.position;
+
+			this.transform.position = Vector2.MoveTowards(playerPos,
+			 playerDestination, walkSpeed * Time.deltaTime);
+
+			if (playerPos.Equals(playerDestination) && !playerDestination.Equals(returnLocation))
+			{
+				dodging = false;
+			}
+			 
+			Debug.Log("playerDestination = " + playerDestination);
 	}
 
 

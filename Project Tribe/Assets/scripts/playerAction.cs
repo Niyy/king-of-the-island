@@ -11,17 +11,22 @@ public class PlayerAction : MonoBehaviour
 	public float damageStrengthMax;
 
 
+	private Animator animator;
 	private string[] actionStates = {"pick-up", "talk", "combat"};
 	private float[] distanceToActivateState = {0.001f, 0.4f, 0.4f};
 	private string currentActionState;
 	private bool inActionState;
+	private bool inCombat;
 	private GameObject itemOfAction;
 	private PlayerMovement playerMovement;
+	private PlayerAction playerAction;
 
 	
 	void Start () 
 	{
 		playerMovement = this.GetComponent<PlayerMovement>();
+		playerAction = this.GetComponent<PlayerAction>();
+		animator = this.GetComponent<Animator>();
 		currentActionState = "idle";
 		dodging = false;
 	}
@@ -33,6 +38,11 @@ public class PlayerAction : MonoBehaviour
 		{
 			combatWatcher();
 		}
+		else
+		{
+			inCombat = false;
+		}
+		Debug.Log("current action state: " + currentActionState);
 	}
 
 
@@ -97,11 +107,25 @@ public class PlayerAction : MonoBehaviour
 	{
 		if (playerMovement.getHasArrived() && Time.time - timeTillAttack >= attackTime)
 		{
+			inCombat = true;
 			float damageDealt = Mathf.RoundToInt(Random.Range(damageStrengthMin, 
 			damageStrengthMax));
 			Debug.Log("Attack enemy: " + damageDealt);
 			itemOfAction.GetComponent<NPCInteraction>().takeDamage(damageDealt);
 			timeTillAttack = Time.time;
 		}
+	}
+
+
+	public void getAnimationDirection ()
+	{
+
+	}
+
+	
+	public bool getIfInCombat ()
+	{
+		Debug.Log("am I in combat: " + inCombat);
+		return inCombat;
 	}
 }

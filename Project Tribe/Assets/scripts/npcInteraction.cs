@@ -53,13 +53,13 @@ public class NPCInteraction : MonoBehaviour
 
 		if(Input.GetMouseButtonUp(1))
 		{
-			if (allianceRelation.Equals("war"))
+			if (allianceRelation.Equals("war") && Vector2.Distance(yourPos, mousePos) <= 0.40)
 			{
 				player.GetComponent<PlayerAction>().setState("combat", this.gameObject);
 				targeted = true;
-				Debug.Log("I have been targeted for combat");
+				Debug.Log("I have been targeted for combat, ");
 			}
-			else if(Vector2.Distance(yourPos, mousePos) <= 0.44)
+			else if(Vector2.Distance(yourPos, mousePos) <= 0.40f)
 			{
 				player.GetComponent<PlayerAction>().setState("talk", this.gameObject);
 				targeted = true;
