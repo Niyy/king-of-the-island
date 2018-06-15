@@ -6,17 +6,20 @@ public class NPCInteraction : MonoBehaviour
 {
 	public float currentHealth;
 	public float startingHealth;
+	public float areaOfAgro;
 
 
 	private GameObject player;
 	private bool targeted;
 	private bool talking;
+	private NPCMovement npcMovement;
 	public string allianceRelation;
 
 	
 	void Awake () 
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
+		npcMovement = this.GetComponent<NPCMovement>();
 		currentHealth = startingHealth;
 		//allianceRelation = "neutral";
 	}
@@ -26,7 +29,7 @@ public class NPCInteraction : MonoBehaviour
 	{
 		checkIfTarget();
 		talkToPlayer();
-		engageInCombat();
+		//engageInCombat();
 	}
 
 
@@ -70,7 +73,12 @@ public class NPCInteraction : MonoBehaviour
 
 	private void engageInCombat()
 	{
-		
+		if(Vector2.Distance(this.transform.position, player.transform.position) <= areaOfAgro
+		&& allianceRelation.Equals("war"))
+		{
+			npcMovement.setMoveTarget(player.transform.position);
+			Debug.Log("I want to engage in combat!");
+		}
 	}
 
 
@@ -83,5 +91,11 @@ public class NPCInteraction : MonoBehaviour
 	public float getCurrentHealth()
 	{
 		return currentHealth;
+	}
+
+
+	public string getAlliance()
+	{
+		return allianceRelation;
 	}
 }

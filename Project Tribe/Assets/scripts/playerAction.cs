@@ -20,6 +20,7 @@ public class PlayerAction : MonoBehaviour
 	private GameObject itemOfAction;
 	private PlayerMovement playerMovement;
 	private PlayerAction playerAction;
+	
 
 	
 	void Start () 
@@ -112,6 +113,12 @@ public class PlayerAction : MonoBehaviour
 			damageStrengthMax));
 			Debug.Log("Attack enemy: " + damageDealt);
 			itemOfAction.GetComponent<NPCInteraction>().takeDamage(damageDealt);
+
+			if(itemOfAction.GetComponent<NPCInteraction>().getCurrentHealth() <= 0)
+			{
+				//Destroy();
+				Destroy(itemOfAction);
+			}
 			timeTillAttack = Time.time;
 		}
 	}

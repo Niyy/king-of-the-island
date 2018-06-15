@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
+		//getBackInRange();
+
 		if(hasADestination)
 		{
 			this.transform.position = Vector2.MoveTowards(this.transform.position,
@@ -128,6 +130,19 @@ public class PlayerMovement : MonoBehaviour
 			}
 			 
 			Debug.Log("playerDestination = " + playerDestination);
+	}
+
+
+	public void getBackInRange ()
+	{
+		if(playerAction.getState().Equals("combat") 
+		&& Vector2.Distance(this.transform.position, playerAction.getObjectOfInteraction().transform.position) 
+		>= playerAction.getActivateDistance())
+		{
+			hasADestination = true;
+			playerDestination = playerAction.getObjectOfInteraction().transform.position;
+			Debug.Log("I am going to get ya.");	
+		}
 	}
 
 
